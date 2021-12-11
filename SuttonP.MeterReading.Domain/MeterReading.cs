@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SuttonP.MeterReading.Domain
+namespace SuttonP.MeterReadings.Domain
 {
-    internal class MeterReading
+    public class MeterReading
     {
         public int AccountId { get; set; }
         public DateTime Taken { get; set; }

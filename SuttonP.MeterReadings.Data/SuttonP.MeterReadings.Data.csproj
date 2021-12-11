@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuttonP.MeterReading.Domain\SuttonP.MeterReading.Domain.csproj" />
+    <ProjectReference Include="..\SuttonP.MeterReading.Domain\SuttonP.MeterReadings.Domain.csproj" />
   </ItemGroup>
 
 </Project>

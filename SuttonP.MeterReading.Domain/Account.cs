@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuttonP.MeterReading.Domain
+namespace SuttonP.MeterReadings.Domain
 {
     public class Account
     {

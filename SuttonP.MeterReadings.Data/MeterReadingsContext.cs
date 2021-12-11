@@ -3,7 +3,7 @@ using CsvHelper.Configuration;
 
 using Microsoft.EntityFrameworkCore;
 
-using SuttonP.MeterReading.Domain;
+using SuttonP.MeterReadings.Domain;
 
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace SuttonP.MeterReadings.Data
         }
 
         public DbSet<Account> Accounts => Set<Account>();
+        public DbSet<MeterReading> MetersReadings => Set<MeterReading>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
