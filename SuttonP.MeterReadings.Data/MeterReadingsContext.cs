@@ -37,7 +37,6 @@ namespace SuttonP.MeterReadings.Data
             using CsvReader csvReader = new(inputReader, csvConfiguration);
             var accounts = csvReader.GetRecords<Account>();
             return accounts;
-
         }
     }
 }

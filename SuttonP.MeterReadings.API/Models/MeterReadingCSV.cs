@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SuttonP.MeterReadings.Domain
+namespace SuttonP.MeterReadings.API.Models
 {
-    public class MeterReading
+    public class MeterReadingCSV
     {
         public int AccountId { get; set; }
         public DateTime Taken { get; set; }
-        public int Value { get; set; }
+        public string Value { get; set; }
     }
 }

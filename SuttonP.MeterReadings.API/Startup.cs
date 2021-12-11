@@ -29,6 +29,7 @@ namespace SuttonP.MeterReadings.API
         {
 
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuttonP.MeterReadings.API", Version = "v1" });
