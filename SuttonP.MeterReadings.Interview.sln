@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuttonP.MeterReadings.API", "SuttonP.MeterReadings.API\SuttonP.MeterReadings.API.csproj", "{03F1AA4F-0574-4E64-9557-692815DED2E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuttonP.MeterReadings.Tests", "SuttonP.MeterReadings.Tests\SuttonP.MeterReadings.Tests.csproj", "{88E3A01E-8030-478F-B0FA-86DB2B0D9C5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{03F1AA4F-0574-4E64-9557-692815DED2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F1AA4F-0574-4E64-9557-692815DED2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F1AA4F-0574-4E64-9557-692815DED2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E3A01E-8030-478F-B0FA-86DB2B0D9C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E3A01E-8030-478F-B0FA-86DB2B0D9C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E3A01E-8030-478F-B0FA-86DB2B0D9C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E3A01E-8030-478F-B0FA-86DB2B0D9C5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

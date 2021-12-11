@@ -15,7 +15,7 @@ namespace SuttonP.MeterReadings.Data
 
         public void Save(IEnumerable<MeterReading> readings)
         {
-            context.MetersReadings.Add(readings);
+            context.MetersReadings.AddRange(readings);
             context.SaveChanges();
         }
     }

@@ -42,7 +42,7 @@ namespace SuttonP.MeterReadings.API.Controllers
         public IReadingValidator MeterReadingValidator { get; }
 
         [HttpPost]
-        public async Task<IActionResult> LoadReadings(MeterFileUploadDto filename)
+        public IActionResult LoadReadings(MeterFileUploadDto filename)
         {
             int validReadings = 0;
             int invalidReadings = 0;
@@ -61,11 +61,12 @@ namespace SuttonP.MeterReadings.API.Controllers
                 }
             }
             repository.Save(validMeterReadings);
+            return Ok(validMeterReadings);
         }
 
         private IEnumerable<MeterReadingCSV> GetMeterReadings(MeterFileUploadDto filename)
         {
-            using StreamReader inputReader = File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Test_Accounts.csv");
+            using StreamReader inputReader = System.IO.File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Test_Accounts.csv");
             CsvConfiguration csvConfiguration = new(CultureInfo.InvariantCulture);
             using CsvReader csvReader = new(inputReader, csvConfiguration);
             return csvReader.GetRecords<MeterReadingCSV>();
