@@ -6,7 +6,8 @@ namespace SuttonP.MeterReadings.API.Validators
     {
         public bool IsValid(MeterReadingCSV meterReading)
         {
-            return true;
+            if (!int.TryParse(meterReading.Value, out int value)) return false;
+            return value > -1;
         }
     }
 }

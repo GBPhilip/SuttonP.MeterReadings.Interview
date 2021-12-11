@@ -14,6 +14,7 @@ using SuttonP.MeterReadings.Domain;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SuttonP.MeterReadings.API.Controllers
@@ -64,12 +65,12 @@ namespace SuttonP.MeterReadings.API.Controllers
             return Ok(validMeterReadings);
         }
 
-        private IEnumerable<MeterReadingCSV> GetMeterReadings(MeterFileUploadDto filename)
+        private List<MeterReadingCSV> GetMeterReadings(MeterFileUploadDto filename)
         {
             using StreamReader inputReader = System.IO.File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Test_Accounts.csv");
             CsvConfiguration csvConfiguration = new(CultureInfo.InvariantCulture);
             using CsvReader csvReader = new(inputReader, csvConfiguration);
-            return csvReader.GetRecords<MeterReadingCSV>();
+            return csvReader.GetRecords<MeterReadingCSV>().ToList();
         }
     }
 }

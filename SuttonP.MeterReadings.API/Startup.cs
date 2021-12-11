@@ -2,11 +2,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+
+using SuttonP.MeterReadings.API.Validators;
+using SuttonP.MeterReadings.Data;
 
 using System;
 using System.Collections.Generic;
@@ -27,9 +31,14 @@ namespace SuttonP.MeterReadings.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MeterReadingsContext>(options => options.UseSqlServer(
+        Configuration.GetConnectionString("MeterConnection")));
 
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IReadingValidator, ReadingValidator>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuttonP.MeterReadings.API", Version = "v1" });

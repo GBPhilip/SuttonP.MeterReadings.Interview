@@ -22,5 +22,19 @@ namespace SuttonP.MeterReadings.Tests
 
             Assert.False(result);
         }
+
+        [Fact]
+        public void When_Reading_Is_Negative_Return_False()
+        {
+            MeterReadingCSV reading = new();
+            reading.AccountId = "1234";
+            reading.Taken = new DateTime(2020, 10, 10);
+            reading.Value = "-5";
+            ReadingValidator sut = new();
+
+            var result = sut.IsValid(reading);
+
+            Assert.False(result);
+        }
     }
 }
