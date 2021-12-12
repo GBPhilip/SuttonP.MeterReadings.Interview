@@ -29,7 +29,10 @@ namespace SuttonP.MeterReadings.Data
             modelBuilder.Entity<Account>().Property(p => p.Id).ValueGeneratedNever();
             modelBuilder.Entity<Account>().HasData(seedAccounts);
             modelBuilder.Entity<MeterReading>().HasKey(k => new { k.AccountId, k.Taken });
-
+            modelBuilder.Entity<MeterReading>()
+                .Property(p => p.Value)
+                .HasMaxLength(5)
+                .IsFixedLength();
         }
 
         private List<Account> GetSeedAccounts()

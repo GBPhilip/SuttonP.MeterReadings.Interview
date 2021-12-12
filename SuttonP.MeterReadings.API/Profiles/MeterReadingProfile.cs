@@ -13,9 +13,6 @@ namespace SuttonP.MeterReadings.API.Profiles
         {
             CreateMap<MeterReadingCSV, MeterReading>()
                 .ForMember(
-                dest => dest.Value,
-                opt => opt.MapFrom(src => int.Parse(src.Value)))
-                .ForMember(
                 dest => dest.Taken,
                 opt => opt.MapFrom(src => DateTime.Parse(src.Taken)));
         }

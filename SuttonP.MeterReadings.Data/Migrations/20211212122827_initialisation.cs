@@ -26,7 +26,7 @@ namespace SuttonP.MeterReadings.Data.Migrations
                 {
                     AccountId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Taken = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Value = table.Column<int>(type: "int", nullable: false)
+                    Value = table.Column<string>(type: "nchar(5)", fixedLength: true, maxLength: 5, nullable: true)
                 },
                 constraints: table =>
                 {

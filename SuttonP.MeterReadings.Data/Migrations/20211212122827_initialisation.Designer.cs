@@ -10,7 +10,7 @@ using SuttonP.MeterReadings.Data;
 namespace SuttonP.MeterReadings.Data.Migrations
 {
     [DbContext(typeof(MeterReadingsContext))]
-    [Migration("20211212082137_initialisation")]
+    [Migration("20211212122827_initialisation")]
     partial class initialisation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,8 +209,10 @@ namespace SuttonP.MeterReadings.Data.Migrations
                     b.Property<DateTime>("Taken")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .HasMaxLength(5)
+                        .HasColumnType("nchar(5)")
+                        .IsFixedLength(true);
 
                     b.HasKey("AccountId", "Taken");
 

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\SuttonP.MeterReading.Domain\SuttonP.MeterReadings.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

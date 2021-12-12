@@ -6,6 +6,6 @@ namespace SuttonP.MeterReadings.Domain
     {
         public string AccountId { get; set; }
         public DateTime Taken { get; set; }
-        public int Value { get; set; }
+        public string Value { get; set; }
     }
 }

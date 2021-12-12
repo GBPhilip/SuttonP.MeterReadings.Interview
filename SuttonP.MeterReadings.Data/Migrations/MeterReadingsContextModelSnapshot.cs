@@ -207,8 +207,10 @@ namespace SuttonP.MeterReadings.Data.Migrations
                     b.Property<DateTime>("Taken")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .HasMaxLength(5)
+                        .HasColumnType("nchar(5)")
+                        .IsFixedLength(true);
 
                     b.HasKey("AccountId", "Taken");
 
