@@ -1,13 +1,13 @@
 using SuttonP.MeterReadings.API.Models;
 using SuttonP.MeterReadings.API.Validators;
 using SuttonP.MeterReadings.Data;
+using SuttonP.MeterReadings.Domain;
 
 using System;
 
 using Xunit;
-
+ 
 using Moq;
-using SuttonP.MeterReadings.Domain;
 
 namespace SuttonP.MeterReadings.Tests
 {
