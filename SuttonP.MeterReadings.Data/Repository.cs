@@ -1,5 +1,6 @@
 ﻿using SuttonP.MeterReadings.Domain;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +15,15 @@ namespace SuttonP.MeterReadings.Data
             this.context = context;
         }
 
-        public void Save(IEnumerable<MeterReading> readings)
+        public void Save(MeterReading reading)
         {
-            context.MetersReadings.AddRange(readings);
+            context.MetersReadings.Add(reading);
             context.SaveChanges();
+        }
+
+        public bool ExistMeterReading(string account, DateTime taken)
+        {
+            return context.MetersReadings.Any(x => x.AccountId == account && x.Taken == taken);
         }
 
         public Account GetAccountById(string id)

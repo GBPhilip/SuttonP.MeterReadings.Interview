@@ -1,78 +1,45 @@
 ﻿using AutoMapper;
 
-using CsvHelper;
-using CsvHelper.Configuration;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-using SuttonP.MeterReadings.API.Maps;
 using SuttonP.MeterReadings.API.Models;
 using SuttonP.MeterReadings.API.Validators;
 using SuttonP.MeterReadings.Data;
 using SuttonP.MeterReadings.Domain;
 
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 
 namespace SuttonP.MeterReadings.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("meter-reading-uploads")]
     public class MeterReadingUploadsController : ControllerBase
     {
         private readonly ILogger<MeterReadingUploadsController> logger;
-        private readonly IMapper mapper;
-        private readonly IRepository repository;
-        private readonly IReadingValidator meterReadingValidator;
-
+        private readonly IMeterReadingFileReader fileReader;
+        private readonly IMeterReadingsProcessor meterReadingsProcessor;
 
         public MeterReadingUploadsController(ILogger<MeterReadingUploadsController> logger
-            , IMapper mapper
-            , IReadingValidator meterReadingValidator
-            , IRepository repository)
+            , IMeterReadingFileReader fileReader
+            , IMeterReadingsProcessor meterReadingsProcessor)
         {
             this.logger = logger;
-            this.mapper = mapper;
-            this.meterReadingValidator = meterReadingValidator;
-            this.repository = repository;
+            this.fileReader = fileReader;
+            this.meterReadingsProcessor = meterReadingsProcessor;
         }
-
-        public IReadingValidator MeterReadingValidator { get; }
 
         [HttpPost]
-        public IActionResult LoadReadings(MeterFileUploadDto filename)
+        public ActionResult<UploadMeterReadingsResponseDTO> LoadReadings(MeterFileUploadDto fileupload)
         {
-            int validReadings = 0;
-            int invalidReadings = 0;
-            var meterReadings = GetMeterReadings(filename);
-            List<MeterReading> validMeterReadings = new();
-            foreach (var meterReading in meterReadings)
-            {
-                if (meterReadingValidator.IsValid(meterReading))
-                {
-                    validMeterReadings.Add(mapper.Map<MeterReading>(meterReading));
-                    validReadings++;
-                }
-                else
-                {
-                    invalidReadings++;
-                }
-            }
-            repository.Save(validMeterReadings);
-            return Ok(validMeterReadings);
+            if (!System.IO.File.Exists(fileupload.FileName)) 
+                return BadRequest("File does not exist");
+            var meterReadings = fileReader.GetMeterReadings(fileupload.FileName);
+            (int validReadings, int invalidReadings) readings = meterReadingsProcessor.Process(meterReadings);
+            
+            return Ok(new UploadMeterReadingsResponseDTO 
+            { InValidReadings = readings.invalidReadings, ValidReadings=readings.validReadings});
         }
 
-        private List<MeterReadingCSV> GetMeterReadings(MeterFileUploadDto filename)
-        {
-            using StreamReader inputReader = System.IO.File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Meter_Reading.csv");
-            CsvConfiguration csvConfiguration = new(CultureInfo.InvariantCulture) ;
-
-            using CsvReader csvReader = new(inputReader, csvConfiguration);
-            csvReader.Context.RegisterClassMap<MeterReadingMap>();
-            return csvReader.GetRecords<MeterReadingCSV>().ToList();
-        }
     }
 }

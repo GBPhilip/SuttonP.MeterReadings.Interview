@@ -9,7 +9,7 @@ namespace SuttonP.MeterReadings.API.Maps
         public MeterReadingMap()
         {
             Map(p => p.AccountId).Name("AccountId");
-            Map(p => p.Taken).Name("MeterReadingDateTime");
+            Map(p => p.Taken).TypeConverter<DateConverter<string>>().Name("MeterReadingDateTime");
             Map(p => p.Value).Name("MeterReadValue");
         }
     }

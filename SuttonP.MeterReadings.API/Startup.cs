@@ -38,6 +38,8 @@ namespace SuttonP.MeterReadings.API
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<IReadingValidator, ReadingValidator>();
+            services.AddTransient<IMeterReadingFileReader, MeterReadingFileReader>();
+            services.AddTransient<IMeterReadingsProcessor, MeterReadingsProcessor>();
 
             services.AddSwaggerGen(c =>
             {

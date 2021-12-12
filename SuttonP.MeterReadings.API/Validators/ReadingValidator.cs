@@ -16,6 +16,7 @@ namespace SuttonP.MeterReadings.API.Validators
         public bool IsValid(MeterReadingCSV meterReading)
         {
             if (!Regex.Match(meterReading.Value, @"^[0-9]{5}$").Success) return false;
+            if (repository.ExistMeterReading(meterReading.AccountId, meterReading.Taken)) return false;
             return repository.GetAccountById(meterReading.AccountId) != null;
         }
     }
