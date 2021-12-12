@@ -6,6 +6,7 @@ namespace SuttonP.MeterReadings.Data
 {
     public interface IRepository
     {
+        Account GetAccountById(string id);
         void Save(IEnumerable<MeterReading> readings);
     }
 }

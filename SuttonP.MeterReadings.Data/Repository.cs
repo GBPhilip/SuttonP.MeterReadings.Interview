@@ -1,6 +1,7 @@
 ﻿using SuttonP.MeterReadings.Domain;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuttonP.MeterReadings.Data
 {
@@ -17,6 +18,11 @@ namespace SuttonP.MeterReadings.Data
         {
             context.MetersReadings.AddRange(readings);
             context.SaveChanges();
+        }
+
+        public Account GetAccountById(string id)
+        {
+            return context.Accounts.SingleOrDefault(x => x.Id == id);
         }
     }
 }
