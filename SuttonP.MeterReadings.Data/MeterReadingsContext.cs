@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace SuttonP.MeterReadings.Data
 {
@@ -27,16 +28,17 @@ namespace SuttonP.MeterReadings.Data
             var seedAccounts = GetSeedAccounts();
             modelBuilder.Entity<Account>().Property(p => p.Id).ValueGeneratedNever();
             modelBuilder.Entity<Account>().HasData(seedAccounts);
+            modelBuilder.Entity<MeterReading>().HasKey(k => new { k.AccountId, k.Taken });
 
         }
 
-        private IEnumerable<Account> GetSeedAccounts()
+        private List<Account> GetSeedAccounts()
         {
             using StreamReader inputReader = File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Test_Accounts.csv");
             CsvConfiguration csvConfiguration = new (CultureInfo.InvariantCulture);
             using CsvReader csvReader = new(inputReader, csvConfiguration);
-            var accounts = csvReader.GetRecords<Account>();
-            return accounts;
+            csvReader.Context.RegisterClassMap<AccountMap>();
+            return csvReader.GetRecords<Account>().ToList();
         }
     }
 }

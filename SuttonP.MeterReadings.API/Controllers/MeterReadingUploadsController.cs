@@ -6,6 +6,7 @@ using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+using SuttonP.MeterReadings.API.Maps;
 using SuttonP.MeterReadings.API.Models;
 using SuttonP.MeterReadings.API.Validators;
 using SuttonP.MeterReadings.Data;
@@ -67,9 +68,11 @@ namespace SuttonP.MeterReadings.API.Controllers
 
         private List<MeterReadingCSV> GetMeterReadings(MeterFileUploadDto filename)
         {
-            using StreamReader inputReader = System.IO.File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Test_Accounts.csv");
-            CsvConfiguration csvConfiguration = new(CultureInfo.InvariantCulture);
+            using StreamReader inputReader = System.IO.File.OpenText(@"C:\Users\GBPhi\source\repos\ensek\SuttonP.MeterReadings.Interview\DataFiles\Meter_Reading.csv");
+            CsvConfiguration csvConfiguration = new(CultureInfo.InvariantCulture) ;
+
             using CsvReader csvReader = new(inputReader, csvConfiguration);
+            csvReader.Context.RegisterClassMap<MeterReadingMap>();
             return csvReader.GetRecords<MeterReadingCSV>().ToList();
         }
     }

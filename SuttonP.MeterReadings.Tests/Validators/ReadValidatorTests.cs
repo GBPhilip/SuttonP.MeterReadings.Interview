@@ -14,7 +14,7 @@ namespace SuttonP.MeterReadings.Tests
         {
             MeterReadingCSV reading = new();
             reading.AccountId = "1234";
-            reading.Taken = new DateTime(2020, 10, 10);
+            reading.Taken = new DateTime(2020, 10, 10).ToString();
             reading.Value = "123.2";
             ReadingValidator sut = new();
 
@@ -28,7 +28,7 @@ namespace SuttonP.MeterReadings.Tests
         {
             MeterReadingCSV reading = new();
             reading.AccountId = "1234";
-            reading.Taken = new DateTime(2020, 10, 10);
+            reading.Taken = new DateTime(2020, 10, 10).ToString();
             reading.Value = "-5";
             ReadingValidator sut = new();
 
